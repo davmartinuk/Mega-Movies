@@ -7,26 +7,26 @@
 	  <p v-if="movies_loading" class="MovieListing__loading">Movies not loading</p>
 	  <ul v-else class="MovieListing">
   		
-		  	<li transition name="fade" class="MovieListing_item" v-for="movie in orderedByPopularity" v-if="movie.vote_average > default_rating && isGenreSelected(movie.genre_ids)">
+		  	<li transition name="fade" class="MovieListing_item" v-for="(movie,index) in orderedByPopularity" v-if="movie.vote_average > default_rating && isGenreSelected(movie.genre_ids)">
 		    		
-		    	
-			    	<h2>{{movie.title}}</h2>
+		    		<img :src="image_loc + movie.poster_path" class="MovieListing__img img-rounded" />
+			    	<h3>{{movie.title}}</h3>
 			    		
-			    	<img :src="image_loc + movie.poster_path" />
+			    	
 					<section v-if="genre_error">
 					    <p>Genres not found</p>
 			  		</section>
 						    	
 			    	<p v-if="genre_loading" class="MovieListing__loading">Loading Genres</p>
 			    	<p v-else>
-		    			{{findGenreName(movie.genre_ids) | arrayToString}} 
+		    			<font-awesome-icon icon="grin" /> {{findGenreName(movie.genre_ids) | arrayToString}} 
 			    	</p>
 
-			    	<p class="MovieListing__vote">{{movie.vote_average}}</p>
-			    	<p class="MovieListing__popularity">{{movie.popularity | decimalPlace}}</p>
+			    	<p class="MovieListing__vote"><font-awesome-icon icon="star" /> {{movie.vote_average}}</p>
+			    	<p class="MovieListing__popularity"><font-awesome-icon icon="fire" /> {{movie.popularity | decimalPlace}}</p>
 		    	</span>
-
 		  	</li>
+
 		  	
 	  	
 	  </ul> 
@@ -122,7 +122,7 @@ export default {
 
 <!-- I would usually do this in BEM in SASS with a suitable framework perhaps, but for quick prototyping this seems fine. -->
 
-<style scoped>
+<style lang="scss" scoped>
 .MovieListing {
   display: flex;
   flex-direction: row;
@@ -133,6 +133,11 @@ export default {
 .MovieListing_item {
 	width: 30%;
 	opacity: 1;
+	margin-bottom:20px;
+}
+
+.MovieListing__img {
+	margin-bottom:10px;
 }
 
 .fade-enter-active, .fade-leave-active {

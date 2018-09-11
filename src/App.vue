@@ -9,36 +9,36 @@
           </div> 
       </div>
       <!--/ HEADER -->
+      <div class="ContentContainer">
+        <div class="LeftNav">
+          <RatingsSlider v-on:changeRating="onChangeRating" />
+          <MovieGenres v-on:changeGenre="onChangeGenre"
+            :genres="genres"
+            :genre_error="genre_error" 
+            :genre_loading="genre_loading"          
+          />
+        </div>
+        <div class="Main">
+        <MovieListing 
+            :movies_loading="movies_loading" 
+            :movies_error="movies_error" 
+            :movies="movies"
 
-      <div class="nav">
-        <RatingsSlider v-on:changeRating="onChangeRating" />
-        <MovieGenres v-on:changeGenre="onChangeGenre"
-          :genres="genres"
-          :genre_error="genre_error" 
-          :genre_loading="genre_loading"          
-        />
+            :genres="genres"
+            :genres_selected="genres_selected"  
+            :genre_error="genre_error" 
+            :genre_loading="genre_loading"
+              
+            :api_key="api_key" 
+            :api_loc="api_loc" 
+            :api_query="api_query"
+
+            :default_rating="default_rating"
+          />
+        </div>
       </div>
-      <div class="content">
-      <MovieListing 
-          :movies_loading="movies_loading" 
-          :movies_error="movies_error" 
-          :movies="movies"
-
-          :genres="genres"
-          :genres_selected="genres_selected"  
-          :genre_error="genre_error" 
-          :genre_loading="genre_loading"
-            
-          :api_key="api_key" 
-          :api_loc="api_loc" 
-          :api_query="api_query"
-
-          :default_rating="default_rating"
-        />
-      </div>
-
       <!-- FOOTER -->
-      <footer class="footer">
+      <footer class="Footer footer">
         <div class="container">
           <span class="text-muted">&copy; Copyright {{app_name}} {{ new Date().getFullYear() }}</span>
         </div>
@@ -127,26 +127,35 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 40px;
+
+
+}
+
+.ContentContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-
 }
 
-.nav {
+.LeftNav {
   flex: 0 0 230px;
 }
 
-.content {
+.Main {
   flex: 1;
+}
+
+.Footer {
+  padding:20px 0;
+  border-top:1px solid #DDD;
 }
 
 </style>

@@ -1,8 +1,9 @@
 <template>
 	<div class="RatingsSlider">
+		<h2><font-awesome-icon icon="star" /> Ratings</h2>
 		<input v-on:change="$emit('current_rating')" type="range" min="0" max="10" v-model:value="current_rating" step="0.5" class="RatingsSlider_slider" id="myRange" @input="onInput">
 		
-		<input type="text" v-model:value="current_rating" class="RatingsSlider_value" > 
+		<input type="text" v-model:value="current_rating" class="RatingsSlider__value" > 
 		
 
 	</div>
@@ -16,7 +17,7 @@ export default {
   data () {
     return {
 		title: 'Adjust Ratings',
-		current_rating: 5
+		current_rating: 3
     }
   },
 
@@ -30,10 +31,14 @@ export default {
 }
 </script>
 
-
+<!-- I would usually do this in BEM in SASS with a suitable framework perhaps, but for quick prototyping this seems fine. -->
 <style lang="scss" scoped>
 
-$red : red;
+$green : #4fc08d;
+
+.RatingsSlider {
+	display:inline-block;
+}
 
 .RatingsSlider_slider {
     -webkit-appearance: none;  /* Override default CSS styles */
@@ -56,7 +61,7 @@ $red : red;
 	    appearance: none;
 	    width: 25px; /* Set a specific slider handle width */
 	    height: 25px; /* Slider handle height */
-	    background: $red; /* Green background */
+	    background: $green; /* Green background */
 	    cursor: pointer; /* Cursor on hover */
 	}
 
@@ -67,10 +72,12 @@ $red : red;
 	    cursor: pointer; /* Cursor on hover */
 	}
 
+}
 
-
-
-
+.RatingsSlider__value {
+	border:0;
+	text-align:center;
+	margin-top:5px;
 }
 
 </style>

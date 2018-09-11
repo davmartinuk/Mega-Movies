@@ -9,10 +9,10 @@ import App from './App'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 // Import font awesomes
-import { faCoffee, faCheck, faFilm } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faCheck, faFilm, faGrin, faStar, faFire } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faCoffee, faCheck, faFilm)
+library.add(faCoffee, faCheck, faFilm, faGrin, faStar, faFire)
 
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
