@@ -15,7 +15,8 @@
           <MovieGenres v-on:changeGenre="onChangeGenre"
             :genres="genres"
             :genre_error="genre_error" 
-            :genre_loading="genre_loading"          
+            :genre_loading="genre_loading" 
+            :show_genres="show_genres"        
           />
         </div>
         <div class="Main">
@@ -81,7 +82,6 @@ export default {
         genre_error: false,
         genre_loading: true,
         
-
         api_key: '?api_key=09e86d901fa3acb38450fb72cfdd402c',  
         api_loc: 'https://api.themoviedb.org/3',
         api_genres_loc: 'https://api.themoviedb.org/3/genre/movie/list',
@@ -113,6 +113,7 @@ export default {
           this.genre_error = true
         })
         .finally(() => this.genre_loading = false) 
+
   },
   methods: {
     onChangeRating(val){
@@ -121,7 +122,53 @@ export default {
     onChangeGenre(val){
       this.genres_selected = val;
     }
-  }
+
+  }, 
+
+  computed: {
+      // finds all unique ids
+      found_genres: function () {
+        var all_genres = [];
+
+        this.movies.data.results.forEach(function(val,index){
+            val.genre_ids.forEach(function(val){
+                all_genres.push(val);
+            })
+        });
+
+        all_genres = _.uniqBy(all_genres);
+        
+        return all_genres // returns all genres found in movie list
+      },
+
+      show_genres: function(){
+         if (!this.genre_loading){
+          var the_genres = new Array(), genre_names = new Array();    
+          
+          the_genres = this.genres.data.genres;
+
+          this.found_genres.forEach(function(val,index) { 
+              var genre_id = val;
+            
+              the_genres.forEach(function(val,index) { 
+                //Matched a genre ID
+                if(genre_id === the_genres[index].id) {
+                  genre_names.push({
+                          name: the_genres[index].name,
+                          id:  the_genres[index].id
+                      });
+                }
+              });
+          });  
+
+          return genre_names;
+         }
+
+  
+
+      }
+
+    }
 
 
 }

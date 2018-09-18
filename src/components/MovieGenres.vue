@@ -8,7 +8,7 @@
 	  	<section v-else>
 			<div class="MovieGenres__list">
 				<div v-if="genre_loading" class="MovieGenre__error"></div>
-				<div v-else class="MovieGenres__item checkbox" v-for="(genre, index) in genres.data.genres" :key="index" >
+				<div v-else class="MovieGenres__item checkbox" v-for="(genre, index) in show_genres" :key="index" >
 		  			<label><input type="checkbox" :id="genre.id" :value="genre.id" v-model="checked_genres" @change="onInput"/>{{genre.name}}</label>
 
 		  		</div>
@@ -21,7 +21,7 @@
 
 export default {
   name: 'MovieGenres',
-  props:['genres', 'genre_loading', 'genre_error'],
+  props:['genres', 'show_genres' ,'genre_loading', 'genre_error'],
   data () {
     return {
 		title: 'Genres',
@@ -30,8 +30,12 @@ export default {
   },
   methods:{
   	onInput(event){
-  		//console.log(this.checked_genres);
   		this.$emit("changeGenre",this.checked_genres);
+  	}
+  },
+  computed:{
+  	onlyShowFoundGenres(){
+
   	}
   }
   

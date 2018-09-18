@@ -19,7 +19,7 @@
 						    	
 			    	<p v-if="genre_loading" class="MovieListing__loading">Loading Genres</p>
 			    	<p v-else>
-		    			<font-awesome-icon icon="grin" /> {{findGenreName(movie.genre_ids) | arrayToString}} 
+		    			<font-awesome-icon icon="grin" /> {{findGenreName(movie.genre_ids) | arrayToString}} {{movie.genre_ids}}
 			    	</p>
 
 			    	<p class="MovieListing__vote"><font-awesome-icon icon="star" /> {{movie.vote_average}}</p>
@@ -40,9 +40,6 @@ import axios from 'axios';
 export default {
   name: 'MovieListing',
   props:[
-  	'api_key', 
-  	'api_loc', 
-  	'api_query', 
   	'genres',
   	'genres_selected',
   	'genre_error',
